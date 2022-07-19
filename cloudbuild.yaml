@@ -1,4 +1,12 @@
 steps:
+- name: ubuntu
+  args: ['bash', '-c', "echo '$COMMIT_SHA' > REVISION.txt"]
+- name: gcr.io/cloud-builders/gsutil
+  args:
+    - 'cp'
+    - '-r'
+    - 'src/function-source.zip'
+    - 'gs://source-test-bjvc'
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
   - functions
