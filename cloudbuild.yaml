@@ -13,7 +13,6 @@ steps:
   - deploy
   - main
   - --source=gs://source-test-bjvc/function-source.zip
-  - --trigger-resource=pe-test-bjvc
-  - --trigger-event=google.storage.object.finalize
+  - --trigger-topic=pe-test-bjvc
   - --runtime=python38
   - --allow-unauthenticated
