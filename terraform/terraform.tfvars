@@ -1,0 +1,5 @@
+project_id     = "ancient-vortex-298120"
+project_region = "us-east1"
+project_zone   = "us-east1-b"
+environment    = "prod"
+#service_name   = "ecosystem"
