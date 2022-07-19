@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - functions
+  - deploy
+  - main
+  - --source='gs://source-test-bjvc/function-source.zip'
+  - --trigger-resource='pe-test-bjvc'
+  - --trigger-event=google.storage.object.finalize
+  - --runtime=python38
+  - --allow-unauthenticated
