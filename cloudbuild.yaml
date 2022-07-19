@@ -13,6 +13,6 @@ steps:
   - deploy
   - main
   - --source=gs://source-test-bjvc/function-source.zip
-  - --trigger-topic=projects/ancient-vortex-298120/topics/prueba
+  - --trigger-topic=prueba
   - --runtime=python38
   - --allow-unauthenticated
