@@ -1,0 +1,29 @@
+steps: 
+- name: gcr.io/cloud-builders/gsutil 
+  args: ['cp','-r','.', 'gs://${_COMPOSER_BUCKET}/${_PATH_BIN_COM_SQL}/'] 
+  dir: $_FUNCION_COMPOSER_SQL 
+  env: 
+    - '_FUNCION_COMPOSER_SQL=bin/sql-scripts/data_zone/.' 
+  id: 'COPY SQL SCRIPTS DAG COMPOSER' 
+
+ 
+- name: gcr.io/cloud-builders/gsutil 
+  args: ['cp','-r','.', 'gs://${_COMPOSER_BUCKET}/${_PATH_BIN_COM}/'] 
+  dir: $_FUNCION_COMPOSER 
+  env: 
+    - '_FUNCION_COMPOSER=bin/dags/' 
+  id: 'COPY DAG COMPOSER' 
+ 
+
+substitutions: 
+    #_STAGE_VALUE: _nonprod 
+    #Variables - Deploy Composer raw 
+    #_PROJECT_ID: rs-nprd-dlk-dt-strm-poc-5380 
+    _COMPOSER_BUCKET: us-east4-ue4-dt-com-gco-tra-a7ba76ab-bucket 
+    _PATH_BIN_COM_SQL: dags/sql 
+    _PATH_BIN_COM: dags 
+    _FUNCION_COMPOSER_SQL: bin/sql-scripts/data_zone/. 
+    _FUNCION_COMPOSER: bin/dags/ 
+ 
+
+tags: ['cloud-builders-community'] 
