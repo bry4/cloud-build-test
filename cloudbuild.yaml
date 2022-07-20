@@ -1,6 +1,43 @@
 steps:
 - name: ubuntu
   args: ['bash', '-c', "echo '$COMMIT_SHA' > REVISION.txt"]
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "terraform/" ]; then
+        cd terraform
+        terraform plan
+      else
+        for dir in terraform/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}  
+          echo ""
+          echo "*************** TERRAFOM PLAN ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform plan || exit 1
+          cd ../../
+        done
+      fi 
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "terraform/" ]; then
+        cd terraform      
+        terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch does not represent an oficial environment."
+        echo "*******************************************************************************"
+      fi
 
 - name: gcr.io/cloud-builders/gsutil
   args:

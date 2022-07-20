@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - pubsub
+  - topics
+  - publish
+  - test-deploy
+  - --message="hello"
+  - --attribute="origin=gcloud-sample,username=gcp"
