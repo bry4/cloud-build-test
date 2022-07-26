@@ -4,6 +4,6 @@ resource "google_pubsub_topic" "prueba" {
 
 resource "google_pubsub_subscription" "prueba-sub" {
   name                       = "us-east1-prueba-deploy-sub-${var.environment}"
-  topic                      = google_pubsub_topic.prueba
+  topic                      = google_pubsub_topic.prueba.name
   message_retention_duration = "1800s"
 }
